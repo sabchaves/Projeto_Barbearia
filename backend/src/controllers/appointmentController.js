@@ -12,11 +12,17 @@ const getAppointments = async (req, res) => {
     // CHECK MONGODB CONNECTIVITY FALLBACK
     if (mongoose.connection.readyState !== 1) {
       const appointments = mockDb.getAppointments(search, status);
+      if (req.user.role === 'client') {
+        return res.json(appointments.filter(app => app.user === req.user._id));
+      }
       return res.json(appointments);
     }
     
-    // Base query: only show appointments created by the logged-in user (barber)
-    let query = { user: req.user._id };
+    // Base query: only show appointments created by the logged-in user if client, show all if admin
+    let query = {};
+    if (req.user.role === 'client') {
+      query.user = req.user._id;
+    }
 
     // Apply Search Filter
     if (search) {
@@ -183,6 +189,10 @@ const deleteAppointment = async (req, res) => {
 // @access  Private
 const getWeeklyReports = async (req, res) => {
   try {
+    if (req.user.role === 'client') {
+      return res.status(403).json({ message: 'Acesso negado. Apenas administradores podem acessar relatórios.' });
+    }
+
     // CHECK MONGODB CONNECTIVITY FALLBACK
     if (mongoose.connection.readyState !== 1) {
       const stats = mockDb.getStats();

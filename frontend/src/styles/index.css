@@ -16,9 +16,9 @@
 
   /* Theme: Dark (Default) */
   --bg-app: #09080e;
-  --bg-card: rgba(18, 15, 28, 0.75);
-  --bg-sidebar: #0f0d1a;
-  --bg-input: #151222;
+  --bg-card: rgba(15, 15, 15, 0.8);
+  --bg-sidebar: #0d0d0d;
+  --bg-input: #161616;
   --border-color: rgba(212, 175, 55, 0.15);
   --border-color-focus: rgba(212, 175, 55, 0.5);
   
@@ -37,10 +37,10 @@
 
 /* Light Theme overrides */
 [data-theme='light'] {
-  --bg-app: #f4f3fa;
+  --bg-app: #f8f7f5;
   --bg-card: rgba(255, 255, 255, 0.85);
   --bg-sidebar: #ffffff;
-  --bg-input: #f3f0fc;
+  --bg-input: #f4f4f2;
   --border-color: rgba(179, 143, 29, 0.12);
   --border-color-focus: rgba(179, 143, 29, 0.5);
   
@@ -107,7 +107,7 @@ button, input, select, textarea {
 
 /* Interactive elements */
 .btn-primary {
-  background: linear-gradient(135deg, var(--primary-purple) 0%, #6d28d9 100%);
+  background: linear-gradient(135deg, var(--primary-purple) 0%, #8c6b12 100%);
   color: #ffffff;
   border: none;
   border-radius: var(--border-radius-sm);
@@ -155,7 +155,7 @@ button, input, select, textarea {
 }
 
 .btn-secondary:hover {
-  background: rgba(139, 92, 246, 0.08);
+  background: rgba(212, 175, 55, 0.08);
   border-color: var(--primary-purple);
 }
 
@@ -199,7 +199,7 @@ button, input, select, textarea {
 select.form-control {
   cursor: pointer;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%238b5cf6'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23d4af37'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 1rem center;
   background-size: 1.2em;
@@ -263,8 +263,8 @@ select.form-control {
   align-items: center;
   min-height: 100vh;
   padding: 1.5rem;
-  background: radial-gradient(circle at 10% 20%, rgba(90, 40, 190, 0.15) 0%, transparent 45%),
-              radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+  background: radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 45%),
+              radial-gradient(circle at 90% 80%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
               var(--bg-app);
 }
 
@@ -288,7 +288,7 @@ select.form-control {
   width: 60px;
   height: 60px;
   border-radius: var(--border-radius-md);
-  background: rgba(139, 92, 246, 0.1);
+  background: rgba(212, 175, 55, 0.1);
   color: var(--primary-purple);
   margin-bottom: 1rem;
   box-shadow: var(--shadow-glow);
@@ -436,7 +436,7 @@ select.form-control {
 }
 
 .theme-btn:hover {
-  background: rgba(139, 92, 246, 0.1);
+  background: rgba(212, 175, 55, 0.1);
   color: var(--primary-purple);
 }
 
@@ -445,7 +445,7 @@ select.form-control {
 }
 
 .moon-icon {
-  color: #a78bfa;
+  color: var(--primary-purple);
 }
 
 .user-profile-box {
@@ -460,7 +460,7 @@ select.form-control {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary-purple) 0%, #6d28d9 100%);
+  background: linear-gradient(135deg, var(--primary-purple) 0%, #8c6b12 100%);
   color: #fff;
   font-weight: 700;
   display: flex;
@@ -552,13 +552,13 @@ select.form-control {
 }
 
 .sidebar-item:hover {
-  background: rgba(139, 92, 246, 0.08);
+  background: rgba(212, 175, 55, 0.08);
   color: var(--text-main);
   padding-left: 1.25rem;
 }
 
 .sidebar-item.active {
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(109, 40, 217, 0.05) 100%);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(171, 136, 30, 0.05) 100%);
   color: var(--primary-purple-hover);
   border-left: 3px solid var(--primary-purple);
   font-weight: 600;
@@ -635,7 +635,7 @@ select.form-control {
   border: 1px solid var(--border-color);
 }
 
-.purple-bg {
+.gold-bg {
   background: rgba(212, 175, 55, 0.15);
   color: var(--primary-purple);
 }
@@ -727,7 +727,7 @@ select.form-control {
   outline: none;
   cursor: pointer;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%238b5cf6'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23d4af37'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
   background-size: 1em;
@@ -788,7 +788,7 @@ select.form-control {
 }
 
 .appointments-table tr:hover td {
-  background-color: rgba(139, 92, 246, 0.03);
+  background-color: rgba(212, 175, 55, 0.03);
 }
 
 .table-actions {

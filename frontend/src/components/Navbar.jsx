@@ -49,7 +49,7 @@ const Navbar = () => {
             </div>
             <div className="user-info-text">
               <span className="user-name">{user.name}</span>
-              <span className="user-role">Profissional</span>
+              <span className="user-role">{user.role === 'admin' ? 'Administrador' : 'Cliente'}</span>
             </div>
             <button onClick={logout} className="logout-btn" title="Sair da conta">
               <LogOut size={18} />

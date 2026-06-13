@@ -93,7 +93,7 @@ const HighFrequencyIcon = ({ size = 26, ...props }) => (
   </svg>
 );
 
-// Restricted Portfolio cuts
+// Restricted Portfolio cuts (Exactly 6 results of finished haircut, beard, and eyebrow)
 const portfolioCuts = [
   {
     url: 'https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=600&auto=format&fit=crop&q=80',
@@ -106,8 +106,23 @@ const portfolioCuts = [
     tag: 'Barba'
   },
   {
-    url: 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&auto=format&fit=crop&q=80',
+    url: 'https://images.unsplash.com/photo-1618077360395-f3068be8e001?w=600&auto=format&fit=crop&q=80',
     title: 'Sobrancelha Navalhada',
+    tag: 'Sobrancelha'
+  },
+  {
+    url: 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&auto=format&fit=crop&q=80',
+    title: 'Corte Moderno Executivo',
+    tag: 'Corte de Cabelo'
+  },
+  {
+    url: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&auto=format&fit=crop&q=80',
+    title: 'Barba Cheia Modelada',
+    tag: 'Barba'
+  },
+  {
+    url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80',
+    title: 'Alinhamento de Sobrancelha',
     tag: 'Sobrancelha'
   }
 ];

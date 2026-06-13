@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Lock, Mail, Scissors } from 'lucide-react';
+import { Lock, Mail, UserCheck } from 'lucide-react';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 
 const Login = () => {
-  useDocumentTitle('Acesso Restrito');
+  useDocumentTitle('Acesso ao Sistema');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [role, setRole] = useState('client'); // 'client' or 'admin'
   const [isSubmitting, setIsSubmitting] = useState(false);
   
   const { login } = useAuth();
@@ -16,13 +17,12 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Validations
     if (!email || !password) {
-      return; // Error toast handled in context or form validation
+      return;
     }
 
     setIsSubmitting(true);
-    const result = await login(email, password);
+    const result = await login(email, password, role);
     setIsSubmitting(false);
 
     if (result.success) {
@@ -52,16 +52,63 @@ const Login = () => {
           <p>Barbearia Premium & Club</p>
         </div>
 
+        {/* ROLE SELECTOR */}
+        <div className="role-selector" style={{
+          display: 'flex',
+          background: 'var(--bg-input, rgba(255,255,255,0.02))',
+          padding: '4px',
+          borderRadius: '8px',
+          marginBottom: '20px',
+          border: '1px solid var(--border-color)'
+        }}>
+          <button
+            type="button"
+            onClick={() => setRole('client')}
+            style={{
+              flex: 1,
+              padding: '10px',
+              borderRadius: '6px',
+              border: 'none',
+              cursor: 'pointer',
+              fontWeight: '600',
+              fontSize: '0.85rem',
+              transition: 'var(--transition-smooth)',
+              background: role === 'client' ? 'var(--primary-purple, #d4af37)' : 'transparent',
+              color: role === 'client' ? '#050408' : 'var(--text-secondary)'
+            }}
+          >
+            Entrar como Cliente
+          </button>
+          <button
+            type="button"
+            onClick={() => setRole('admin')}
+            style={{
+              flex: 1,
+              padding: '10px',
+              borderRadius: '6px',
+              border: 'none',
+              cursor: 'pointer',
+              fontWeight: '600',
+              fontSize: '0.85rem',
+              transition: 'var(--transition-smooth)',
+              background: role === 'admin' ? 'var(--primary-purple, #d4af37)' : 'transparent',
+              color: role === 'admin' ? '#050408' : 'var(--text-secondary)'
+            }}
+          >
+            Entrar como Administrador
+          </button>
+        </div>
+
         <form onSubmit={handleSubmit} className="auth-form">
           <div className="form-group">
-            <label htmlFor="email">Email Corporativo</label>
+            <label htmlFor="email">E-mail de Acesso</label>
             <div className="input-with-icon">
               <Mail size={18} className="input-icon" />
               <input
                 type="email"
                 id="email"
                 className="form-control"
-                placeholder="exemplo@cabeludos.com"
+                placeholder="seuemail@exemplo.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -91,7 +138,7 @@ const Login = () => {
         </form>
 
         <div className="auth-footer">
-          <p>Não tem um login profissional? <Link to="/register" className="auth-link">Cadastre-se aqui</Link></p>
+          <p>Não tem um login? <Link to="/register" className="auth-link">Cadastre-se aqui</Link></p>
         </div>
       </div>
     </div>

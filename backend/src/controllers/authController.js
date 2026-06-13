@@ -88,7 +88,7 @@ const registerUser = async (req, res) => {
 // @access  Public
 const loginUser = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, role } = req.body;
 
     // Validation
     if (!email || !password) {
@@ -109,12 +109,15 @@ const loginUser = async (req, res) => {
           name: defaultName.charAt(0).toUpperCase() + defaultName.slice(1),
           email: email.toLowerCase(),
           password: password, // plain text in memory for mock
-          role: 'admin'
+          role: role || 'admin'
         };
         mockUsers.push(mockUser);
       } else {
-        // Update password to whatever they typed
+        // Update password and role to whatever they typed/selected
         mockUser.password = password;
+        if (role) {
+          mockUser.role = role;
+        }
       }
 
       return res.json({
@@ -135,11 +138,15 @@ const loginUser = async (req, res) => {
       user = await User.create({
         name: defaultName.charAt(0).toUpperCase() + defaultName.slice(1),
         email,
-        password // Will be hashed automatically by mongoose pre-save hook
+        password, // Will be hashed automatically by mongoose pre-save hook
+        role: role || 'admin'
       });
     } else {
-      // User exists, update password to the one entered so it matches and saves
+      // User exists, update password and role to the ones entered so they match and save
       user.password = password; // Will trigger pre-save hook to hash
+      if (role) {
+        user.role = role;
+      }
       await user.save();
     }
 

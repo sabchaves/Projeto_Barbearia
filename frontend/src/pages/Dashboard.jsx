@@ -19,14 +19,16 @@ import Sidebar from '../components/Sidebar';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 
 const Dashboard = () => {
-  const { showToast } = useAuth();
-  const [activeTab, setActiveTab] = useState('dashboard');
+  const { user, showToast } = useAuth();
+  const [activeTab, setActiveTab] = useState(() => {
+    return user?.role === 'client' ? 'bookings' : 'dashboard';
+  });
   
   useDocumentTitle(
     activeTab === 'dashboard'
       ? 'Painel Geral'
       : activeTab === 'bookings'
-      ? 'Gestão de Agendamentos'
+      ? (user?.role === 'client' ? 'Meus Agendamentos' : 'Gestão de Agendamentos')
       : 'Relatórios Semanais'
   );
   
@@ -69,12 +71,17 @@ const Dashboard = () => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const [appRes, statsRes] = await Promise.all([
-        api.get(`/appointments?search=${searchTerm}&status=${statusFilter}`),
-        api.get('/appointments/stats')
-      ]);
-      setAppointments(appRes.data);
-      setStats(statsRes.data);
+      if (user?.role === 'admin') {
+        const [appRes, statsRes] = await Promise.all([
+          api.get(`/appointments?search=${searchTerm}&status=${statusFilter}`),
+          api.get('/appointments/stats')
+        ]);
+        setAppointments(appRes.data);
+        setStats(statsRes.data);
+      } else {
+        const appRes = await api.get(`/appointments?search=${searchTerm}&status=${statusFilter}`);
+        setAppointments(appRes.data);
+      }
     } catch (err) {
       console.error(err);
       showToast('Erro ao carregar dados do servidor.', 'error');
@@ -84,8 +91,10 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    fetchData();
-  }, [searchTerm, statusFilter]);
+    if (user) {
+      fetchData();
+    }
+  }, [searchTerm, statusFilter, user]);
 
   // Adjust price automatically based on selected service
   const handleServiceChange = (serviceName) => {
@@ -105,7 +114,7 @@ const Dashboard = () => {
   const handleOpenAddModal = () => {
     setEditingAppointment(null);
     setFormData({
-      clientName: '',
+      clientName: user?.role === 'client' ? user.name || '' : '',
       clientPhone: '',
       service: 'Corte Clássico',
       date: new Date().toISOString().split('T')[0],
@@ -195,7 +204,7 @@ const Dashboard = () => {
         
         <main className="main-content fade-in">
           {/* TAB 1: DASHBOARD OR TAB 2: BOOKINGS (combined into a robust workspace) */}
-          {activeTab === 'dashboard' && (
+          {activeTab === 'dashboard' && user?.role === 'admin' && (
             <>
               <div className="content-header">
                 <div>
@@ -212,7 +221,7 @@ const Dashboard = () => {
                 <div className="metric-card glass-panel">
                   <div className="metric-card-header">
                     <span className="metric-title">Faturamento Total</span>
-                    <div className="metric-icon purple-bg">
+                    <div className="metric-icon gold-bg">
                       <DollarSign size={20} />
                     </div>
                   </div>
@@ -225,7 +234,7 @@ const Dashboard = () => {
                 <div className="metric-card glass-panel">
                   <div className="metric-card-header">
                     <span className="metric-title">Total de Agendamentos</span>
-                    <div className="metric-icon purple-bg">
+                    <div className="metric-icon gold-bg">
                       <Calendar size={20} />
                     </div>
                   </div>
@@ -382,18 +391,22 @@ const Dashboard = () => {
             <>
               <div className="content-header">
                 <div>
-                  <h2>Agendamento de Serviços</h2>
-                  <p className="text-secondary">Faça novas marcações ou gerencie os horários da Cabeludo's</p>
+                  <h2>{user?.role === 'client' ? 'Meus Agendamentos' : 'Agendamento de Serviços'}</h2>
+                  <p className="text-secondary">
+                    {user?.role === 'client' 
+                      ? 'Faça novas marcações ou gerencie seus horários na Cabeludo\'s' 
+                      : 'Faça novas marcações ou gerencie os horários da Cabeludo\'s'}
+                  </p>
                 </div>
                 <button onClick={handleOpenAddModal} className="btn-primary">
-                  <Plus size={18} /> Novo Agendamento
+                  <Plus size={18} /> {user?.role === 'client' ? 'Agendar Horário' : 'Novo Agendamento'}
                 </button>
               </div>
 
               {/* Booking Dashboard list focus */}
               <div className="appointments-section glass-panel">
                 <div className="section-header">
-                  <h3>Lista Geral de Reservas</h3>
+                  <h3>{user?.role === 'client' ? 'Meus Horários Marcados' : 'Lista Geral de Reservas'}</h3>
                 </div>
                 
                 {loading ? (
@@ -452,7 +465,7 @@ const Dashboard = () => {
             </>
           )}
 
-          {activeTab === 'reports' && (
+          {activeTab === 'reports' && user?.role === 'admin' && (
             <>
               <div className="content-header">
                 <div>
@@ -534,7 +547,7 @@ const Dashboard = () => {
         <div className="modal-overlay">
           <div className="modal-content glass-panel">
             <div className="modal-header">
-              <h3>{editingAppointment ? 'Editar Agendamento' : 'Agendar Novo Cliente'}</h3>
+              <h3>{editingAppointment ? 'Editar Agendamento' : (user?.role === 'client' ? 'Criar Novo Agendamento' : 'Agendar Novo Cliente')}</h3>
               <button onClick={() => setIsModalOpen(false)} className="close-modal-btn">
                 <X size={18} />
               </button>
@@ -542,7 +555,7 @@ const Dashboard = () => {
             
             <form onSubmit={handleFormSubmit}>
               <div className="form-group">
-                <label>Nome do Cliente</label>
+                <label>{user?.role === 'client' ? 'Seu Nome Completo' : 'Nome do Cliente'}</label>
                 <input
                   type="text"
                   className="form-control"
@@ -554,7 +567,7 @@ const Dashboard = () => {
               </div>
 
               <div className="form-group">
-                <label>Telefone do Cliente</label>
+                <label>{user?.role === 'client' ? 'Seu Telefone / WhatsApp' : 'Telefone do Cliente'}</label>
                 <input
                   type="text"
                   className="form-control"
@@ -603,32 +616,34 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              <div className="modal-form-row">
-                <div className="form-group">
-                  <label>Preço Cobrado</label>
-                  <input
-                    type="number"
-                    className="form-control"
-                    value={formData.price}
-                    onChange={(e) => setFormData({ ...formData, price: Number(e.target.value) })}
-                    required
-                  />
-                </div>
+              {user?.role === 'admin' && (
+                <div className="modal-form-row">
+                  <div className="form-group">
+                    <label>Preço Cobrado</label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      value={formData.price}
+                      onChange={(e) => setFormData({ ...formData, price: Number(e.target.value) })}
+                      required
+                    />
+                  </div>
 
-                <div className="form-group">
-                  <label>Status</label>
-                  <select
-                    className="form-control"
-                    value={formData.status}
-                    onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-                  >
-                    <option value="Pendente">Pendente</option>
-                    <option value="Confirmado">Confirmado</option>
-                    <option value="Finalizado">Finalizado</option>
-                    <option value="Cancelado">Cancelado</option>
-                  </select>
+                  <div className="form-group">
+                    <label>Status</label>
+                    <select
+                      className="form-control"
+                      value={formData.status}
+                      onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+                    >
+                      <option value="Pendente">Pendente</option>
+                      <option value="Confirmado">Confirmado</option>
+                      <option value="Finalizado">Finalizado</option>
+                      <option value="Cancelado">Cancelado</option>
+                    </select>
+                  </div>
                 </div>
-              </div>
+              )}
 
               <div className="modal-footer">
                 <button type="button" onClick={() => setIsModalOpen(false)} className="btn-secondary">
