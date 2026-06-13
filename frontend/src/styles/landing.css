@@ -286,6 +286,37 @@
   line-height: 1.6;
 }
 
+.landing-hero-cta {
+  color: var(--landing-gold);
+  font-weight: 700;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  transition: var(--landing-transition);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  animation: goldPulse 3.5s infinite ease-in-out;
+}
+
+.landing-hero-cta:hover {
+  color: var(--landing-gold-hover);
+  text-shadow: 0 0 10px var(--landing-gold-glow);
+  transform: scale(1.02);
+}
+
+@keyframes goldPulse {
+  0% {
+    text-shadow: 0 0 2px rgba(212, 175, 55, 0.2);
+  }
+  50% {
+    text-shadow: 0 0 12px rgba(212, 175, 55, 0.7);
+  }
+  100% {
+    text-shadow: 0 0 2px rgba(212, 175, 55, 0.2);
+  }
+}
+
+
 .landing-hero-image-side {
   position: relative;
   width: 100%;

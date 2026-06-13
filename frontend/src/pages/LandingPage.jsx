@@ -37,6 +37,12 @@ import barberMarcosImg from '../assets/barber_marcos.png';
 import barberThiagoImg from '../assets/barber_thiago.png';
 import barberAlineImg from '../assets/barber_aline.png';
 
+// Import new local portfolio assets
+import portfolioCorteImg from '../assets/portfolio_corte_moderno.png';
+import portfolioBarbaCheiaImg from '../assets/portfolio_barba_cheia.png';
+import portfolioDesignBarbaImg from '../assets/portfolio_design_barba.png';
+import portfolioSobrancelhaImg from '../assets/portfolio_sobrancelha.png';
+
 // Clipper Logo SVG
 const ClipperLogo = ({ size = 36, ...props }) => (
   <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
@@ -93,37 +99,32 @@ const HighFrequencyIcon = ({ size = 26, ...props }) => (
   </svg>
 );
 
-// Restricted Portfolio cuts (Exactly 6 results of finished haircut, beard, and eyebrow)
+// Restricted Portfolio cuts focusing entirely on high-quality service results
 const portfolioCuts = [
   {
-    url: 'https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=600&auto=format&fit=crop&q=80',
-    title: 'Corte Degradê Clássico',
+    url: portfolioCorteImg,
+    title: 'Corte Moderno',
     tag: 'Corte de Cabelo'
   },
   {
-    url: 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&auto=format&fit=crop&q=80',
+    url: portfolioBarbaCheiaImg,
+    title: 'Barba Cheia',
+    tag: 'Barba'
+  },
+  {
+    url: portfolioDesignBarbaImg,
     title: 'Design de Barba Alinhada',
     tag: 'Barba'
   },
   {
-    url: 'https://images.unsplash.com/photo-1618077360395-f3068be8e001?w=600&auto=format&fit=crop&q=80',
-    title: 'Sobrancelha Navalhada',
+    url: portfolioSobrancelhaImg,
+    title: 'Sobrancelha Alinhada',
     tag: 'Sobrancelha'
   },
   {
-    url: 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&auto=format&fit=crop&q=80',
-    title: 'Corte Moderno Executivo',
-    tag: 'Corte de Cabelo'
-  },
-  {
-    url: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&auto=format&fit=crop&q=80',
-    title: 'Barba Cheia Modelada',
-    tag: 'Barba'
-  },
-  {
-    url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80',
-    title: 'Alinhamento de Sobrancelha',
-    tag: 'Sobrancelha'
+    url: 'https://images.unsplash.com/photo-1620331713290-265276011a9d?w=600&auto=format&fit=crop&q=80',
+    title: 'Barbaterapia',
+    tag: 'Barbaterapia'
   }
 ];
 
@@ -385,11 +386,11 @@ const LandingPage = () => {
             Contribuindo para a sua autoestima através do seu estilo.
           </h1>
           <p className="landing-hero-subtitle">
-            Não perca seu horário. Agende agora mesmo.
+            Não perca seu horário,{' '}
+            <span onClick={() => setIsModalOpen(true)} className="landing-hero-cta">
+              agende agora mesmo
+            </span>.
           </p>
-          <button onClick={() => setIsModalOpen(true)} className="landing-btn-gold">
-            Agendar horário
-          </button>
         </div>
         <div className="landing-hero-image-side animate-fade-in-up animate-delay-1">
           <img src={heroBg} alt="Barbeiro profissional trabalhando na Cabeludo's" className="landing-hero-img-split" />
