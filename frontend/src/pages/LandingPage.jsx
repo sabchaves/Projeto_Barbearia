@@ -42,6 +42,8 @@ import portfolioCorteImg from '../assets/portfolio_corte_moderno.png';
 import portfolioBarbaCheiaImg from '../assets/portfolio_barba_cheia.png';
 import portfolioDesignBarbaImg from '../assets/portfolio_design_barba.png';
 import portfolioSobrancelhaImg from '../assets/portfolio_sobrancelha.png';
+import portfolioBarbaterapiaImg from '../assets/portfolio_barbaterapia.png';
+import portfolioEsfoliacaoImg from '../assets/portfolio_esfoliacao.png';
 
 // Clipper Logo SVG
 const ClipperLogo = ({ size = 36, ...props }) => (
@@ -122,9 +124,14 @@ const portfolioCuts = [
     tag: 'Sobrancelha'
   },
   {
-    url: 'https://images.unsplash.com/photo-1620331713290-265276011a9d?w=600&auto=format&fit=crop&q=80',
+    url: portfolioBarbaterapiaImg,
     title: 'Barbaterapia',
     tag: 'Barbaterapia'
+  },
+  {
+    url: portfolioEsfoliacaoImg,
+    title: 'Esfoliação Facial',
+    tag: 'Tratamentos'
   }
 ];
 
