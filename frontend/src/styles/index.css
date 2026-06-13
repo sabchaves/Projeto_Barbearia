@@ -19,20 +19,20 @@
   --bg-card: rgba(18, 15, 28, 0.75);
   --bg-sidebar: #0f0d1a;
   --bg-input: #151222;
-  --border-color: rgba(139, 92, 246, 0.15);
-  --border-color-focus: rgba(139, 92, 246, 0.5);
+  --border-color: rgba(212, 175, 55, 0.15);
+  --border-color-focus: rgba(212, 175, 55, 0.5);
   
-  --primary-purple: #8b5cf6;
-  --primary-purple-glow: rgba(139, 92, 246, 0.35);
-  --primary-purple-hover: #a78bfa;
+  --primary-purple: #d4af37;
+  --primary-purple-glow: rgba(212, 175, 55, 0.35);
+  --primary-purple-hover: #f3e5ab;
   --text-main: #f3f4f6;
   --text-secondary: #9ca3af;
   --text-muted: #6b7280;
   
   --shadow-card: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 25px rgba(139, 92, 246, 0.25);
+  --shadow-glow: 0 0 25px rgba(212, 175, 55, 0.25);
   --backdrop-blur: blur(16px);
-  --card-hover-border: rgba(139, 92, 246, 0.35);
+  --card-hover-border: rgba(212, 175, 55, 0.35);
 }
 
 /* Light Theme overrides */
@@ -41,20 +41,20 @@
   --bg-card: rgba(255, 255, 255, 0.85);
   --bg-sidebar: #ffffff;
   --bg-input: #f3f0fc;
-  --border-color: rgba(124, 58, 237, 0.12);
-  --border-color-focus: rgba(124, 58, 237, 0.5);
+  --border-color: rgba(179, 143, 29, 0.12);
+  --border-color-focus: rgba(179, 143, 29, 0.5);
   
-  --primary-purple: #7c3aed;
-  --primary-purple-glow: rgba(124, 58, 237, 0.2);
-  --primary-purple-hover: #6d28d9;
+  --primary-purple: #b38f1d;
+  --primary-purple-glow: rgba(179, 143, 29, 0.2);
+  --primary-purple-hover: #917111;
   --text-main: #1f2937;
   --text-secondary: #4b5563;
   --text-muted: #9ca3af;
   
-  --shadow-card: 0 8px 32px 0 rgba(124, 58, 237, 0.08);
-  --shadow-glow: 0 4px 20px rgba(124, 58, 237, 0.15);
+  --shadow-card: 0 8px 32px 0 rgba(179, 143, 29, 0.08);
+  --shadow-glow: 0 4px 20px rgba(179, 143, 29, 0.15);
   --backdrop-blur: blur(16px);
-  --card-hover-border: rgba(124, 58, 237, 0.3);
+  --card-hover-border: rgba(179, 143, 29, 0.3);
 }
 
 /* Base Styles */
@@ -386,7 +386,7 @@ select.form-control {
   width: 36px;
   height: 36px;
   border-radius: 8px;
-  background: rgba(139, 92, 246, 0.15);
+  background: rgba(212, 175, 55, 0.15);
   border: 1px solid var(--border-color);
   color: var(--primary-purple);
 }
@@ -408,7 +408,7 @@ select.form-control {
 
 .brand-tag {
   font-size: 0.75rem;
-  background: rgba(139, 92, 246, 0.1);
+  background: rgba(212, 175, 55, 0.1);
   color: var(--primary-purple);
   padding: 0.2rem 0.5rem;
   border-radius: 4px;
@@ -636,7 +636,7 @@ select.form-control {
 }
 
 .purple-bg {
-  background: rgba(139, 92, 246, 0.15);
+  background: rgba(212, 175, 55, 0.15);
   color: var(--primary-purple);
 }
 
@@ -748,7 +748,7 @@ select.form-control {
 }
 
 .service-tag {
-  background: rgba(139, 92, 246, 0.12);
+  background: rgba(212, 175, 55, 0.12);
   color: var(--primary-purple-hover);
   padding: 0.25rem 0.6rem;
   border-radius: 4px;
@@ -757,7 +757,7 @@ select.form-control {
 }
 
 [data-theme='light'] .service-tag {
-  background: rgba(124, 58, 237, 0.08);
+  background: rgba(179, 143, 29, 0.08);
   color: var(--primary-purple);
 }
 
@@ -811,7 +811,7 @@ select.form-control {
 }
 
 .action-btn:hover {
-  background: rgba(139, 92, 246, 0.1);
+  background: rgba(212, 175, 55, 0.1);
 }
 
 .text-success { color: var(--color-success); }
@@ -893,7 +893,7 @@ select.form-control {
 
 .bar-fill {
   width: 100%;
-  background: linear-gradient(180deg, var(--primary-purple) 0%, #6d28d9 100%);
+  background: linear-gradient(180deg, var(--primary-purple) 0%, #ab881e 100%);
   border-radius: var(--border-radius-sm);
   transition: height 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   box-shadow: var(--shadow-glow);

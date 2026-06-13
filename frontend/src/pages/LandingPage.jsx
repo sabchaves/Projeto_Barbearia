@@ -33,12 +33,67 @@ import {
 import heroBg from '../assets/hero_barber_bg.png';
 import aboutImg from '../assets/barbershop_interior.png';
 import barberDiegoImg from '../assets/barber_diego.png';
+import barberMarcosImg from '../assets/barber_marcos.png';
+import barberThiagoImg from '../assets/barber_thiago.png';
 import barberAlineImg from '../assets/barber_aline.png';
 
-// Unsplash fallbacks
-const barberMarcosImg = 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=500&auto=format&fit=crop&q=80';
-const barberThiagoImg = 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=500&auto=format&fit=crop&q=80';
+// Clipper Logo SVG
+const ClipperLogo = ({ size = 36, ...props }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <path d="M30 15 h40 v8 h-40 z" fill="currentColor"/>
+    <path d="M33 8 v7 h4 v-7 z" fill="currentColor"/>
+    <path d="M41 8 v7 h4 v-7 z" fill="currentColor"/>
+    <path d="M49 8 v7 h4 v-7 z" fill="currentColor"/>
+    <path d="M57 8 v7 h4 v-7 z" fill="currentColor"/>
+    <path d="M65 8 v7 h4 v-7 z" fill="currentColor"/>
+    <path d="M25 26 l5 3 v8 l-5 -3 z" fill="currentColor" opacity="0.7"/>
+    <path d="M32 23 L37 82 C38 86, 62 86, 63 82 L68 23 Z" fill="currentColor"/>
+    <rect x="46" y="40" width="8" height="18" rx="4" fill="currentColor" opacity="0.2"/>
+    <circle cx="50" cy="46" r="3" fill="currentColor"/>
+  </svg>
+);
 
+// Straight Razor SVG
+const RazorIcon = ({ size = 26, ...props }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <path d="M25 75 L65 40" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
+    <path d="M45 42 L80 15 C83 12, 88 15, 85 20 L65 58 Z" fill="currentColor" opacity="0.95" />
+    <circle cx="45" cy="42" r="3" fill="currentColor" />
+  </svg>
+);
+
+// Hot Towel Spa SVG
+const SpaTowelIcon = ({ size = 26, ...props }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <rect x="25" y="50" width="50" height="20" rx="6" fill="currentColor" />
+    <rect x="30" y="62" width="40" height="15" rx="5" fill="currentColor" opacity="0.6" />
+    <path d="M35 40 Q38 30 35 20" stroke="currentColor" strokeWidth="4" strokeLinecap="round" fill="none" />
+    <path d="M50 42 Q53 32 50 22" stroke="currentColor" strokeWidth="4" strokeLinecap="round" fill="none" />
+    <path d="M65 40 Q68 30 65 20" stroke="currentColor" strokeWidth="4" strokeLinecap="round" fill="none" />
+  </svg>
+);
+
+// Skincare Exfoliation Jar SVG
+const SkincareIcon = ({ size = 26, ...props }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <path d="M25 45 H75 V75 C75 80, 70 85, 65 85 H35 C30 85, 25 80, 25 75 Z" fill="currentColor" opacity="0.9" />
+    <rect x="20" y="32" width="60" height="10" rx="3" fill="currentColor" />
+    <path d="M50 12 C55 22, 45 22, 50 32" stroke="currentColor" strokeWidth="4" strokeLinecap="round" fill="none" />
+    <circle cx="50" cy="62" r="8" fill="currentColor" opacity="0.3" />
+  </svg>
+);
+
+// High Frequency Tech SVG
+const HighFrequencyIcon = ({ size = 26, ...props }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+    <path d="M50 85 V35 Q50 15 75 10" stroke="currentColor" strokeWidth="5" strokeLinecap="round" fill="none" />
+    <path d="M20 85 H80" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+    <path d="M30 40 L38 48 L28 56 L36 64" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    <path d="M70 42 L62 50 L72 58 L64 66" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+  </svg>
+);
+
+// Restricted Portfolio cuts
 const portfolioCuts = [
   {
     url: 'https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=600&auto=format&fit=crop&q=80',
@@ -46,19 +101,14 @@ const portfolioCuts = [
     tag: 'Corte de Cabelo'
   },
   {
-    url: 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&auto=format&fit=crop&q=80',
-    title: 'Design Barbaterapia',
-    tag: 'Barbaterapia'
-  },
-  {
     url: 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?w=600&auto=format&fit=crop&q=80',
-    title: 'Sobrancelha Navalhada',
-    tag: 'Design de Sobrancelha'
+    title: 'Design de Barba Alinhada',
+    tag: 'Barba'
   },
   {
-    url: 'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=600&auto=format&fit=crop&q=80',
-    title: 'Ambiente Cabeludo\'s',
-    tag: 'Nossa Barbearia'
+    url: 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=600&auto=format&fit=crop&q=80',
+    title: 'Sobrancelha Navalhada',
+    tag: 'Sobrancelha'
   }
 ];
 
@@ -67,7 +117,7 @@ const LandingPage = () => {
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
-  // Scroll detection state for navbar background
+  // Scroll detection state
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('inicio');
 
@@ -90,7 +140,6 @@ const LandingPage = () => {
   // Handle scroll events
   useEffect(() => {
     const handleScroll = () => {
-      // Navbar background change
       if (window.scrollY > 50) {
         setIsScrolled(true);
       } else {
@@ -156,7 +205,6 @@ const LandingPage = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    // Field validation
     if (!formData.clientName || !formData.clientPhone || !formData.date || !formData.time) {
       showToast('Por favor, preencha todos os campos do agendamento.', 'error');
       return;
@@ -165,7 +213,6 @@ const LandingPage = () => {
     setIsSubmitting(true);
 
     try {
-      // 1. Check if user needs authentication
       if (!user) {
         if (!formData.email || !formData.password) {
           showToast('Informe seu e-mail e crie uma senha para confirmar seu agendamento.', 'error');
@@ -179,7 +226,6 @@ const LandingPage = () => {
           return;
         }
 
-        // Call authController login (registers on the fly with any password)
         const loginRes = await login(formData.email, formData.password);
         if (!loginRes.success) {
           setIsSubmitting(false);
@@ -187,7 +233,6 @@ const LandingPage = () => {
         }
       }
 
-      // 2. Perform booking
       const bookingPayload = {
         clientName: formData.clientName,
         clientPhone: formData.clientPhone,
@@ -198,12 +243,10 @@ const LandingPage = () => {
         status: 'Confirmado'
       };
 
-      // api intercepts and adds Authorization header automatically
       await api.post('/appointments', bookingPayload);
       showToast('Seu horário foi agendado e confirmado com sucesso!');
       setIsModalOpen(false);
       
-      // Reset form
       setFormData({
         clientName: '',
         clientPhone: '',
@@ -228,11 +271,7 @@ const LandingPage = () => {
       <nav className={`landing-navbar ${isScrolled ? 'scrolled' : ''}`}>
         <div className="landing-brand" onClick={() => scrollToSection('inicio')}>
           <div className="landing-brand-logo">
-            {/* Custom minimalist logo: Stylized/sedoso male hair scissors hybrid */}
-            <svg width="36" height="36" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M50 15C32 15 22 28 20 45C23 41 28 38 35 38C45 38 48 44 55 44C62 44 68 38 78 38C84 38 87 40 90 42C86 28 72 15 50 15Z" fill="currentColor"/>
-              <path d="M22 55C25 58 30 60 38 60C48 60 52 54 58 54C64 54 70 60 80 60C85 60 88 58 91 56C85 75 70 85 50 85C30 85 18 72 22 55Z" fill="currentColor" opacity="0.6"/>
-            </svg>
+            <ClipperLogo size={36} />
           </div>
           <span className="landing-brand-name">Cabeludo's</span>
         </div>
@@ -324,7 +363,7 @@ const LandingPage = () => {
         </div>
       </nav>
 
-      {/* HERO SECTION (SPLIT SCREEN LAYOUT) */}
+      {/* HERO SECTION */}
       <header id="inicio" className="landing-hero">
         <div className="landing-hero-content animate-fade-in-up">
           <h1 className="landing-hero-title">
@@ -397,10 +436,10 @@ const LandingPage = () => {
             </p>
           </div>
 
-          {/* Card 2 - Barba */}
+          {/* Card 2 - Barba (Custom Razor Icon) */}
           <div className="landing-service-card animate-fade-in-up animate-delay-2">
             <div className="landing-service-icon-box">
-              <User size={26} />
+              <RazorIcon />
             </div>
             <div className="landing-service-header">
               <h3 className="landing-service-name">Barba</h3>
@@ -411,10 +450,10 @@ const LandingPage = () => {
             </p>
           </div>
 
-          {/* Card 3 - Barbaterapia */}
+          {/* Card 3 - Barbaterapia (Custom Towel/Spa Icon) */}
           <div className="landing-service-card animate-fade-in-up animate-delay-3">
             <div className="landing-service-icon-box">
-              <Sparkles size={26} />
+              <SpaTowelIcon />
             </div>
             <div className="landing-service-header">
               <h3 className="landing-service-name">Barbaterapia</h3>
@@ -439,10 +478,10 @@ const LandingPage = () => {
             </p>
           </div>
 
-          {/* Card 5 - Esfoliação */}
+          {/* Card 5 - Esfoliação (Custom Skincare Jar Icon) */}
           <div className="landing-service-card animate-fade-in-up animate-delay-2">
             <div className="landing-service-icon-box">
-              <ShieldCheck size={26} />
+              <SkincareIcon />
             </div>
             <div className="landing-service-header">
               <h3 className="landing-service-name">Esfoliação</h3>
@@ -453,10 +492,10 @@ const LandingPage = () => {
             </p>
           </div>
 
-          {/* Card 6 - Alta Frequência */}
+          {/* Card 6 - Alta Frequência (Custom Capillary Tech Icon) */}
           <div className="landing-service-card animate-fade-in-up animate-delay-3">
             <div className="landing-service-icon-box">
-              <Wind size={26} />
+              <HighFrequencyIcon />
             </div>
             <div className="landing-service-header">
               <h3 className="landing-service-name">Tratamento de alta frequência</h3>
