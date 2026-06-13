@@ -394,7 +394,7 @@ const LandingPage = () => {
           </h1>
           <p className="landing-hero-subtitle">
             Não perca seu horário,{' '}
-            <span onClick={() => setIsModalOpen(true)} className="landing-hero-cta">
+            <span className="landing-hero-cta">
               agende agora mesmo
             </span>.
           </p>
