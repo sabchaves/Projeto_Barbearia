@@ -1109,3 +1109,302 @@ select.form-control {
     gap: 0;
   }
 }
+
+/* Auth divider */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 1.5rem 0;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.auth-divider:not(:empty)::before {
+  margin-right: .75em;
+}
+
+.auth-divider:not(:empty)::after {
+  margin-left: .75em;
+}
+
+/* Google official style button with theme overrides */
+.google-btn {
+  width: 100%;
+  height: 44px;
+  background-color: #ffffff;
+  color: #1f2937;
+  border: 1px solid #dadce0;
+  border-radius: var(--border-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.google-btn:hover {
+  background-color: #f9fafb;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+.google-btn:active {
+  transform: translateY(0);
+}
+
+[data-theme='dark'] .google-btn {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--text-main);
+  border-color: var(--border-color);
+}
+
+[data-theme='dark'] .google-btn:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: var(--primary-purple);
+}
+
+/* Google Account Selector Simulation Modal */
+.google-select-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.google-select-modal {
+  width: 100%;
+  max-width: 400px;
+  background: #ffffff;
+  color: #202124;
+  border-radius: 8px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  font-family: 'Roboto', 'Inter', sans-serif;
+  animation: googleModalIn 0.3s cubic-bezier(0.1, 0.8, 0.25, 1);
+}
+
+[data-theme='dark'] .google-select-modal {
+  background: #202124;
+  color: #e8eaed;
+  border: 1px solid #3c4043;
+}
+
+@keyframes googleModalIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.google-select-header {
+  padding: 24px 24px 16px;
+  text-align: center;
+  border-bottom: 1px solid #f1f3f4;
+}
+
+[data-theme='dark'] .google-select-header {
+  border-bottom: 1px solid #3c4043;
+}
+
+.google-select-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.google-select-title {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 28px;
+  margin-bottom: 6px;
+  color: #202124;
+}
+
+[data-theme='dark'] .google-select-title {
+  color: #e8eaed;
+}
+
+.google-select-subtitle {
+  font-size: 14px;
+  color: #5f6368;
+}
+
+[data-theme='dark'] .google-select-subtitle {
+  color: #9aa0a6;
+}
+
+.google-select-body {
+  padding: 8px 0;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.google-account-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 24px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.google-account-item:hover {
+  background-color: #f1f3f4;
+}
+
+[data-theme='dark'] .google-account-item:hover {
+  background-color: #303134;
+}
+
+.google-account-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #e8f0fe;
+  color: #1a73e8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.google-account-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.google-account-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #3c4043;
+}
+
+[data-theme='dark'] .google-account-name {
+  color: #e8eaed;
+}
+
+.google-account-email {
+  font-size: 12px;
+  color: #5f6368;
+}
+
+[data-theme='dark'] .google-account-email {
+  color: #9aa0a6;
+}
+
+.google-select-footer {
+  padding: 16px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-top: 1px solid #f1f3f4;
+}
+
+[data-theme='dark'] .google-select-footer {
+  border-top: 1px solid #3c4043;
+}
+
+.google-custom-email-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #dadce0;
+  border-radius: 4px;
+  font-size: 14px;
+  background: #ffffff;
+  color: #202124;
+  outline: none;
+}
+
+.google-custom-email-input:focus {
+  border-color: #1a73e8;
+}
+
+[data-theme='dark'] .google-custom-email-input {
+  border-color: #5f6368;
+  background: #303134;
+  color: #e8eaed;
+}
+
+[data-theme='dark'] .google-custom-email-input:focus {
+  border-color: #8ab4f8;
+}
+
+.google-custom-email-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #1a73e8;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.google-custom-email-btn:hover {
+  background-color: #1557b0;
+}
+
+[data-theme='dark'] .google-custom-email-btn {
+  background-color: #8ab4f8;
+  color: #202124;
+}
+
+[data-theme='dark'] .google-custom-email-btn:hover {
+  background-color: #aecbfa;
+}
+
+.google-select-cancel-btn {
+  text-align: center;
+  background: none;
+  border: none;
+  color: #1a73e8;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.google-select-cancel-btn:hover {
+  color: #1557b0;
+}
+
+[data-theme='dark'] .google-select-cancel-btn {
+  color: #8ab4f8;
+}
+
+[data-theme='dark'] .google-select-cancel-btn:hover {
+  color: #aecbfa;
+}
+

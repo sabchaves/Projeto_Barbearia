@@ -34,6 +34,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.removeItem('token');
         setToken('');
         setUser(null);
+        showToast('Sua sessão expirou, tente novamente.', 'error');
       } finally {
         setLoading(false);
       }
@@ -89,6 +90,24 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Login with Google action
+  const loginWithGoogle = async (idToken) => {
+    try {
+      const res = await axios.post(`${API_URL}/auth/google`, { idToken });
+      const { token: userToken, ...userData } = res.data;
+
+      localStorage.setItem('token', userToken);
+      setToken(userToken);
+      setUser(userData);
+      showToast(`Bem-vindo, ${userData.name}!`, 'success');
+      return { success: true };
+    } catch (err) {
+      const message = err.response?.data?.message || 'Não foi possível autenticar com o Google.';
+      showToast(message, 'error');
+      return { success: false, message };
+    }
+  };
+
   // Logout action
   const logout = () => {
     localStorage.removeItem('token');
@@ -104,6 +123,7 @@ export const AuthProvider = ({ children }) => {
         token,
         loading,
         login,
+        loginWithGoogle,
         register,
         logout,
         toasts,

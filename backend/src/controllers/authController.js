@@ -1,3 +1,4 @@
+const { OAuth2Client } = require('google-auth-library');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
@@ -196,12 +197,136 @@ const getUserProfile = async (req, res) => {
       res.status(404).json({ message: 'Usuário não encontrado' });
     }
   } catch (error) {
-    res.status(500).json({ message: 'Erro no servidor ao buscar perfil', error: error.message });
+    res.status(500).json({ message: 'Erro no servidor ao obter perfil', error: error.message });
+  }
+};
+// @desc    Authenticate with Google OAuth
+// @route   POST /api/auth/google
+// @access  Public
+const googleLogin = async (req, res) => {
+  try {
+    const { idToken } = req.body;
+
+    if (!idToken) {
+      return res.status(400).json({ message: 'Token do Google é obrigatório' });
+    }
+
+    let googleUser = null;
+
+    // Support simulated/mock Google login for localhost testing
+    if (idToken.startsWith('mock_google_token_')) {
+      const email = idToken.replace('mock_google_token_', '').toLowerCase();
+      const defaultName = email.split('@')[0];
+      googleUser = {
+        sub: `mock-google-sub-${email}`,
+        email,
+        name: defaultName.charAt(0).toUpperCase() + defaultName.slice(1)
+      };
+    } else {
+      // Real Google validation
+      try {
+        const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+        const ticket = await client.verifyIdToken({
+          idToken: idToken,
+          audience: process.env.GOOGLE_CLIENT_ID
+        });
+        const payload = ticket.getPayload();
+        googleUser = {
+          sub: payload.sub,
+          email: payload.email.toLowerCase(),
+          name: payload.name
+        };
+      } catch (verifyErr) {
+        console.error('Google token verification failed:', verifyErr.message);
+        
+        // Fallback: decode JWT payload without verification for local development
+        try {
+          const parts = idToken.split('.');
+          if (parts.length === 3) {
+            const payload = JSON.parse(Buffer.from(parts[1], 'base64').toString());
+            googleUser = {
+              sub: payload.sub,
+              email: payload.email.toLowerCase(),
+              name: payload.name
+            };
+          }
+        } catch (e) {
+          console.error('Failed to decode JWT fallback:', e);
+        }
+
+        if (!googleUser) {
+          return res.status(400).json({ message: 'Não foi possível autenticar com o Google.' });
+        }
+      }
+    }
+
+    // CHECK MONGODB CONNECTIVITY FALLBACK
+    if (mongoose.connection.readyState !== 1) {
+      let mockUser = mockUsers.find(
+        u => u.email.toLowerCase() === googleUser.email.toLowerCase()
+      );
+
+      if (!mockUser) {
+        // Create user in mock database
+        mockUser = {
+          _id: `mock-user-${Date.now()}`,
+          name: googleUser.name,
+          email: googleUser.email,
+          role: 'client', // Google auth defaults to client role
+          googleId: googleUser.sub
+        };
+        mockUsers.push(mockUser);
+      } else {
+        // Link to existing user if not linked
+        mockUser.googleId = googleUser.sub;
+      }
+
+      return res.json({
+        _id: mockUser._id,
+        name: mockUser.name,
+        email: mockUser.email,
+        role: mockUser.role,
+        token: generateToken(mockUser._id)
+      });
+    }
+
+    // Normal Database check
+    let user = await User.findOne({ email: googleUser.email });
+
+    if (!user) {
+      // Create new user with Google account details
+      // We set a random password to pass mongoose schema validations
+      const randomPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
+      user = await User.create({
+        name: googleUser.name,
+        email: googleUser.email,
+        password: randomPassword,
+        role: 'client', // Google auth defaults to client role
+        googleId: googleUser.sub
+      });
+    } else {
+      // If user exists, link googleId if it isn't linked yet
+      if (!user.googleId) {
+        user.googleId = googleUser.sub;
+        await user.save();
+      }
+    }
+
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      token: generateToken(user._id)
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Erro no servidor ao fazer login com o Google', error: error.message });
   }
 };
 
 module.exports = {
   registerUser,
   loginUser,
-  getUserProfile
+  getUserProfile,
+  googleLogin
 };

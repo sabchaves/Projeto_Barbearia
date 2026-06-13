@@ -27,6 +27,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     enum: ['admin', 'client'],
     default: 'admin'
+  },
+  googleId: {
+    type: String,
+    sparse: true
   }
 }, {
   timestamps: true
