@@ -615,7 +615,7 @@ const LandingPage = () => {
               <a href="https://instagram.com" target="_blank" rel="noreferrer" className="landing-footer-social-btn">
                 <Instagram size={18} />
               </a>
-              <a href="https://wa.me/5511999999999" target="_blank" rel="noreferrer" className="landing-footer-social-btn">
+              <a href="https://wa.me/5585997011547" target="_blank" rel="noreferrer" className="landing-footer-social-btn">
                 <MessageCircle size={18} />
               </a>
             </div>
@@ -655,22 +655,22 @@ const LandingPage = () => {
                 <Phone className="landing-footer-item-icon" size={16} />
                 <div>
                   <strong>Telefone:</strong>
-                  <br />(11) 3456-7890
+                  <br />(85) 9 9701-1547
                 </div>
               </li>
               <li className="landing-footer-item">
                 <MessageCircle className="landing-footer-item-icon" size={16} />
                 <div>
                   <strong>WhatsApp:</strong>
-                  <br />(11) 99999-9999
+                  <br />(85) 9 9701-1547
                 </div>
               </li>
               <li className="landing-footer-item">
                 <MapPin className="landing-footer-item-icon" size={16} />
                 <div>
                   <strong>Endereço:</strong>
-                  <br />Av. Paulista, 1000 - Bela Vista
-                  <br />São Paulo - SP
+                  <br />Av. Pedro Alves, 1000
+                  <br />Acopiara - CE
                 </div>
               </li>
             </ul>
@@ -687,7 +687,7 @@ const LandingPage = () => {
 
       {/* WHATSAPP FLOAT BUTTON */}
       <a
-        href="https://wa.me/5511999999999?text=Ol%C3%A1%21+Gostaria+de+agendar+um+hor%C3%A1rio+na+barbearia+Cabeludo%27s."
+        href="https://wa.me/5585997011547?text=Ol%C3%A1%21+Gostaria+de+agendar+um+hor%C3%A1rio+na+barbearia+Cabeludo%27s."
         target="_blank"
         rel="noreferrer"
         className="whatsapp-float"
@@ -730,7 +730,7 @@ const LandingPage = () => {
                     <input
                       type="text"
                       className="form-control"
-                      placeholder="(11) 99999-9999"
+                      placeholder="(85) 9 9701-1547"
                       value={formData.clientPhone}
                       onChange={(e) => setFormData({ ...formData, clientPhone: e.target.value })}
                       required
