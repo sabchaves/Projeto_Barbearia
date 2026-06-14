@@ -41,12 +41,34 @@ const seedData = async () => {
 
     console.log('Populando dados de agendamentos fictícios...');
     
-    const seedAppointments = [
+    const clientNames = [
+      'Roberto Alencar', 'Carlos Santoro', 'Eduardo Costa', 'Julio Prestes', 
+      'Arthur Nogueira', 'Lucas Lima', 'Diego Alcântara', 'Marcos Rangel', 
+      'Gustavo Lima', 'Felipe Marques', 'Matheus Pereira', 'Rodrigo Faro',
+      'Bruno Covas', 'Thiago Lacerda', 'Guilherme Briggs', 'Fabio Assunção',
+      'Renato Aragão', 'Claudio Castro', 'Alexandre Frota', 'Neymar Junior',
+      'Gabriel Barbosa', 'Everton Ribeiro', 'Giorgian Arrascaeta', 'Pedro Guilherme'
+    ];
+
+    const servicesList = [
+      { name: 'Corte Clássico', price: 50 },
+      { name: 'Barba Terapia', price: 45 },
+      { name: 'Cabelo e Barba', price: 85 },
+      { name: 'Sobrancelha Navallada', price: 25 },
+      { name: 'Tratamento Capilar', price: 120 }
+    ];
+
+    const timesList = ['09:00', '10:00', '11:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
+
+    const seedAppointments = [];
+
+    // Ensure some fixed today/tomorrow appointments exist
+    seedAppointments.push(
       {
         clientName: 'Roberto Alencar',
         clientPhone: '(11) 98765-4321',
         service: 'Corte Clássico',
-        date: d(0), // Today
+        date: d(0),
         time: '09:00',
         price: 50,
         status: 'Finalizado',
@@ -56,77 +78,17 @@ const seedData = async () => {
         clientName: 'Carlos Santoro',
         clientPhone: '(11) 99876-5432',
         service: 'Cabelo e Barba',
-        date: d(0), // Today
+        date: d(0),
         time: '14:00',
         price: 85,
         status: 'Confirmado',
         user: adminUser._id
       },
       {
-        clientName: 'Eduardo Costa',
-        clientPhone: '(11) 97654-3210',
-        service: 'Barba Terapia',
-        date: d(1), // Yesterday
-        time: '10:30',
-        price: 45,
-        status: 'Finalizado',
-        user: adminUser._id
-      },
-      {
-        clientName: 'Julio Prestes',
-        clientPhone: '(21) 98888-7777',
-        service: 'Sobrancelha Navallada',
-        date: d(2), // 2 days ago
-        time: '16:00',
-        price: 25,
-        status: 'Finalizado',
-        user: adminUser._id
-      },
-      {
-        clientName: 'Arthur Nogueira',
-        clientPhone: '(11) 93333-2222',
-        service: 'Tratamento Capilar',
-        date: d(3), // 3 days ago
-        time: '11:00',
-        price: 120,
-        status: 'Finalizado',
-        user: adminUser._id
-      },
-      {
-        clientName: 'Felipe Marques',
-        clientPhone: '(19) 97412-5632',
-        service: 'Cabelo e Barba',
-        date: d(4), // 4 days ago
-        time: '15:30',
-        price: 85,
-        status: 'Finalizado',
-        user: adminUser._id
-      },
-      {
-        clientName: 'Matheus Pereira',
-        clientPhone: '(11) 98523-6471',
-        service: 'Corte Clássico',
-        date: d(5), // 5 days ago
-        time: '18:00',
-        price: 50,
-        status: 'Finalizado',
-        user: adminUser._id
-      },
-      {
-        clientName: 'Rodrigo Faro',
-        clientPhone: '(11) 99999-8888',
-        service: 'Corte Clássico',
-        date: d(6), // 6 days ago
-        time: '13:00',
-        price: 50,
-        status: 'Finalizado',
-        user: adminUser._id
-      },
-      {
         clientName: 'Lucas Lima',
         clientPhone: '(11) 91234-5678',
         service: 'Barba Terapia',
-        date: d(0), // Today
+        date: d(0),
         time: '16:30',
         price: 45,
         status: 'Pendente',
@@ -142,7 +104,35 @@ const seedData = async () => {
         status: 'Confirmado',
         user: adminUser._id
       }
-    ];
+    );
+
+    // Generate other randomized records spread over the past 30 days
+    for (let i = 0; i < 55; i++) {
+      const dayOffset = Math.floor(Math.random() * 30); // 0 to 29 days ago
+      if (dayOffset === 0) continue; // Skip today, already seeded
+      
+      const client = clientNames[Math.floor(Math.random() * clientNames.length)];
+      const serviceObj = servicesList[Math.floor(Math.random() * servicesList.length)];
+      const time = timesList[Math.floor(Math.random() * timesList.length)];
+      
+      let status = 'Finalizado';
+      if (Math.random() < 0.08) {
+        status = 'Cancelado';
+      } else if (Math.random() < 0.05) {
+        status = 'Confirmado';
+      }
+
+      seedAppointments.push({
+        clientName: client,
+        clientPhone: `(11) 9${Math.floor(1000 + Math.random() * 9000)}-${Math.floor(1000 + Math.random() * 9000)}`,
+        service: serviceObj.name,
+        date: d(dayOffset),
+        time: time,
+        price: serviceObj.price,
+        status: status,
+        user: adminUser._id
+      });
+    }
 
     await Appointment.insertMany(seedAppointments);
     console.log('Banco de dados semeado com sucesso!');

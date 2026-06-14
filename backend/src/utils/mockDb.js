@@ -19,74 +19,100 @@ const d = (offsetDays) => {
   return date;
 };
 
-let mockAppointments = [
+const clientNames = [
+  'Roberto Alencar', 'Carlos Santoro', 'Eduardo Costa', 'Julio Prestes', 
+  'Arthur Nogueira', 'Lucas Lima', 'Diego Alcântara', 'Marcos Rangel', 
+  'Gustavo Lima', 'Felipe Marques', 'Matheus Pereira', 'Rodrigo Faro',
+  'Bruno Covas', 'Thiago Lacerda', 'Guilherme Briggs', 'Fabio Assunção',
+  'Renato Aragão', 'Claudio Castro', 'Alexandre Frota', 'Neymar Junior',
+  'Gabriel Barbosa', 'Everton Ribeiro', 'Giorgian Arrascaeta', 'Pedro Guilherme'
+];
+
+const servicesList = [
+  { name: 'Corte Clássico', price: 50 },
+  { name: 'Barba Terapia', price: 45 },
+  { name: 'Cabelo e Barba', price: 85 },
+  { name: 'Sobrancelha Navallada', price: 25 },
+  { name: 'Tratamento Capilar', price: 120 }
+];
+
+const timesList = ['09:00', '10:00', '11:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
+
+// Programmatically generate a rich set of 60 mock appointments spanning the last 30 days
+let mockAppointments = [];
+
+// Ensure we have some fixed today appointments
+mockAppointments.push(
   {
-    _id: 'mock-app-1',
+    _id: 'mock-app-today-1',
     clientName: 'Roberto Alencar',
     clientPhone: '(11) 98765-4321',
     service: 'Corte Clássico',
-    date: d(0), // Today
+    date: d(0),
     time: '09:00',
     price: 50,
     status: 'Finalizado',
     user: 'mock-admin-id'
   },
   {
-    _id: 'mock-app-2',
+    _id: 'mock-app-today-2',
     clientName: 'Carlos Santoro',
     clientPhone: '(11) 99876-5432',
     service: 'Cabelo e Barba',
-    date: d(0), // Today
+    date: d(0),
     time: '14:00',
     price: 85,
     status: 'Confirmado',
     user: 'mock-admin-id'
   },
   {
-    _id: 'mock-app-3',
-    clientName: 'Eduardo Costa',
-    clientPhone: '(11) 97654-3210',
-    service: 'Barba Terapia',
-    date: d(1), // Yesterday
-    time: '10:30',
-    price: 45,
-    status: 'Finalizado',
-    user: 'mock-admin-id'
-  },
-  {
-    _id: 'mock-app-4',
-    clientName: 'Julio Prestes',
-    clientPhone: '(21) 98888-7777',
-    service: 'Sobrancelha Navallada',
-    date: d(2), // 2 days ago
-    time: '16:00',
-    price: 25,
-    status: 'Finalizado',
-    user: 'mock-admin-id'
-  },
-  {
-    _id: 'mock-app-5',
-    clientName: 'Arthur Nogueira',
-    clientPhone: '(11) 93333-2222',
-    service: 'Tratamento Capilar',
-    date: d(3), // 3 days ago
-    time: '11:00',
-    price: 120,
-    status: 'Finalizado',
-    user: 'mock-admin-id'
-  },
-  {
-    _id: 'mock-app-6',
+    _id: 'mock-app-today-3',
     clientName: 'Lucas Lima',
     clientPhone: '(11) 91234-5678',
     service: 'Barba Terapia',
-    date: d(0), // Today
+    date: d(0),
     time: '16:30',
     price: 45,
     status: 'Pendente',
     user: 'mock-admin-id'
   }
-];
+);
+
+// Generate other randomized records spread over the past 30 days
+for (let i = 0; i < 55; i++) {
+  const dayOffset = Math.floor(Math.random() * 30); // 0 to 29 days ago
+  if (dayOffset === 0) continue; // Skip today, already seeded
+  
+  const client = clientNames[Math.floor(Math.random() * clientNames.length)];
+  const serviceObj = servicesList[Math.floor(Math.random() * servicesList.length)];
+  const time = timesList[Math.floor(Math.random() * timesList.length)];
+  
+  let status = 'Finalizado';
+  if (Math.random() < 0.08) {
+    status = 'Cancelado';
+  } else if (Math.random() < 0.05) {
+    status = 'Confirmado';
+  }
+
+  mockAppointments.push({
+    _id: `mock-app-${100 + i}`,
+    clientName: client,
+    clientPhone: `(11) 9${Math.floor(1000 + Math.random() * 9000)}-${Math.floor(1000 + Math.random() * 9000)}`,
+    service: serviceObj.name,
+    date: d(dayOffset),
+    time: time,
+    price: serviceObj.price,
+    status: status,
+    user: 'mock-admin-id'
+  });
+}
+
+// Sort mock appointments by date ascending, then time
+mockAppointments.sort((a, b) => {
+  const dateDiff = new Date(a.date) - new Date(b.date);
+  if (dateDiff !== 0) return dateDiff;
+  return a.time.localeCompare(b.time);
+});
 
 module.exports = {
   mockUsers,
