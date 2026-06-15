@@ -1,3 +1,6 @@
+//O painel principal elegante com gráficos de faturamento por dia, 
+//ranking de serviços populares e a lista/calendário de agendamentos.
+
 import React, { useState, useEffect } from 'react';
 import api from '../services/api';
 import { useAuth } from '../context/AuthContext';

@@ -1,3 +1,5 @@
+//É o interruptor de luz do frontend. Ele pega o React e o "injeta" diretamente no arquivo index.html.
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';

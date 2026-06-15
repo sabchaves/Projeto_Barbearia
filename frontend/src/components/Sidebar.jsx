@@ -1,3 +1,5 @@
+//O menu lateral de navegação adaptável para celulares.
+
 import React from 'react';
 import { LayoutDashboard, CalendarPlus, BarChart3, LogOut } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';

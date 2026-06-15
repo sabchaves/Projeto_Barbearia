@@ -1,3 +1,6 @@
+//Um componente especial que envolve as páginas privadas (como o Dashboard), 
+// impedindo que pessoas não logadas acessem a tela digitando a URL direta.
+
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';

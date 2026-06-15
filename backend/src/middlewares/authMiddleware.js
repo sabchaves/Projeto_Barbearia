@@ -1,3 +1,7 @@
+//Ele intercepta a requisição do usuário e verifica se ele tem um token JWT válido. 
+// Se o usuário não estiver logado, o middleware barra o acesso e não deixa ele ver dados sensíveis da barbearia.
+
+
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const mongoose = require('mongoose');

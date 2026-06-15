@@ -1,3 +1,7 @@
+//Gerencia as informações de login do usuário, sabendo se ele está logado ou não,
+//e controla o disparo dos Toasts (aqueles pequenos alertas flutuantes de sucesso ou erro 
+//que aparecem no canto da tela).
+
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 

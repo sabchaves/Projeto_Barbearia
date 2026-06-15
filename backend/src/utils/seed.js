@@ -1,5 +1,9 @@
+//É um script utilitário muito útil para testes. Quando executado, ele limpa o banco de dados
+//e insere dados falsos de demonstração (como o login do administrador padrão e alguns agendamentos antigos) 
+//para que os gráficos do painel não iniciem vazios.
+
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+const dotenv = require('dotenv');s
 const User = require('../models/User');
 const Appointment = require('../models/Appointment');
 

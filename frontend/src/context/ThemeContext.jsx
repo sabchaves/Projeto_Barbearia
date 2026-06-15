@@ -1,3 +1,5 @@
+//Controla se o aplicativo está no Modo Escuro (Dark) ou Claro (Light) em tempo real por todo o sistema.
+
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const ThemeContext = createContext();

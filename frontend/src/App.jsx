@@ -1,3 +1,6 @@
+//O grande maestro da interface. Ele define as rotas que mudam a página do usuário, 
+//carrega as configurações globais e gerencia os estados principais do sistema.
+
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';

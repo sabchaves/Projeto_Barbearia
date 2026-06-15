@@ -1,3 +1,6 @@
+//É o ponto de entrada do servidor. É o arquivo principal que liga 
+// o Express, define a porta (ex: 5000), conecta as rotas e coloca o backend para rodar.
+
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');

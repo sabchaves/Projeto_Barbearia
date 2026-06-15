@@ -1,3 +1,5 @@
+//A barra superior que mostra o logo, perfil e o botão de trocar de tema.
+
 import React from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';

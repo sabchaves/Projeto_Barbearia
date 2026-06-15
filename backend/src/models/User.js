@@ -1,3 +1,5 @@
+//Define o que um usuário/administrador precisa ter no banco (ex: nome, email, senha criptografada).
+
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 

@@ -1,3 +1,7 @@
+//Configuração centralizada do Axios. É aqui que você define que o frontend deve 
+//sempre enviar requisições para a URL do backend (http://localhost:5000/api). Ele também anexa 
+// o token JWT automaticamente em cada chamada após o login.
+
 import axios from 'axios';
 
 const api = axios.create({

@@ -1,3 +1,5 @@
+//Define a estrutura de um agendamento de corte de cabelo ou barba (cliente, data, hora, serviço escolhido, preço).
+
 const mongoose = require('mongoose');
 
 const AppointmentSchema = new mongoose.Schema({
