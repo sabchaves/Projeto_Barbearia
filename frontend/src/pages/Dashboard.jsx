@@ -36,26 +36,33 @@ const Dashboard = () => {
       : 'Relatórios Semanais'
   );
   
-  // Dashboard & appointments data
+  // --- ESTADOS DOS DADOS DE AGENDAMENTO ---
+  // appointments: Lista filtrada e buscada de agendamentos exibida na tabela principal.
   const [appointments, setAppointments] = useState([]);
+  // allAppointments: Lista completa e não filtrada de agendamentos para cálculos e relatórios estatísticos (admin).
   const [allAppointments, setAllAppointments] = useState([]);
   
-  // Interactive Line Chart State
-  const [chartMetric, setChartMetric] = useState('revenue'); // 'revenue' or 'count'
+  // --- ESTADOS DO GRÁFICO DE LINHA/ÁREA INTERATIVO ---
+  // chartMetric: Define a métrica ativa a ser plotada no gráfico principal ('revenue' para Faturamento em R$ ou 'count' para quantidade de atendimentos).
+  const [chartMetric, setChartMetric] = useState('revenue'); 
+  // tooltipState: Controla o balão de informações flutuante (tooltip) que aparece no gráfico ao passar o mouse.
   const [tooltipState, setTooltipState] = useState({
-    x: 0,
-    y: 0,
-    visible: false,
-    value: '',
-    date: ''
+    x: 0,         // Posição horizontal (em pixels) em relação ao container do gráfico.
+    y: 0,         // Posição vertical (em pixels) em relação ao container do gráfico.
+    visible: false, // Controla se o tooltip está visível ou oculto.
+    value: '',    // Texto formatado com o valor financeiro ou contagem do ponto de dados.
+    date: ''      // A data do ponto de dados correspondente.
   });
+  // activePointIndex: Armazena o índice do ponto do gráfico que está atualmente focado (hover).
   const [activePointIndex, setActivePointIndex] = useState(null);
   
-  // Interactive Donut Chart State
+  // --- ESTADO DO GRÁFICO DE ROSCA (DONUT) ---
+  // hoveredDonutSegment: Armazena os dados do segmento (serviço) atualmente sob o cursor do mouse para exibir na legenda central.
   const [hoveredDonutSegment, setHoveredDonutSegment] = useState(null);
   
-  // Reports State
-  const [reportPeriod, setReportPeriod] = useState(7); // 7, 14, or 30 days
+  // --- ESTADO DA ABA DE RELATÓRIOS ---
+  // reportPeriod: Determina o período ativo para análise dos relatórios semanais/mensais (7, 14 ou 30 dias).
+  const [reportPeriod, setReportPeriod] = useState(7);
 
   const [stats, setStats] = useState({
     summary: {
