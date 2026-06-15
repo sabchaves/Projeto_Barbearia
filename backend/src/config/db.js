@@ -1,3 +1,6 @@
+//O db.js é o arquivo responsável por fazer a ponte de conexão entre o seu servidor (Node.js/Express)
+//e o seu banco de dados na nuvem (MongoDB Atlas).
+
 const mongoose = require('mongoose');
 
 const connectDB = async () => {

@@ -1,3 +1,4 @@
+//O termo MockDB (ou Mock Database) significa, literalmente, um banco de dados simulado ou "falso".
 // Mock In-Memory Database Fallback
 // This allows the app to be fully functional out of the box even if MongoDB is not connected.
 

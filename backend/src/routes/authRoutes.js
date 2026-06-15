@@ -1,3 +1,5 @@
+//Este arquivo define os caminhos de URL para tudo o que envolve segurança e acesso ao sistema.
+
 const express = require('express');
 const router = express.Router();
 const {

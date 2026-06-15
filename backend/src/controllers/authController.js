@@ -1,3 +1,6 @@
+//Este arquivo cuida de toda a segurança, entrada e registo de utilizadores (administradores) no sistema.
+//Ele controla quem pode ou não aceder ao painel da barbearia.
+
 const { OAuth2Client } = require('google-auth-library');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');

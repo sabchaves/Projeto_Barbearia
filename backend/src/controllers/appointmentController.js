@@ -1,3 +1,6 @@
+//Este arquivo cuida do coração do negócio da barbearia: os agendamentos dos cortes de cabelo e barba.
+//Ele gerencia todas as ações de criar, listar ou apagar horários marcados.
+
 const Appointment = require('../models/Appointment');
 const mongoose = require('mongoose');
 const mockDb = require('../utils/mockDb');

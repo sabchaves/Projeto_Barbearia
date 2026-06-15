@@ -1,3 +1,5 @@
+//Este arquivo define os caminhos de URL para gerenciar a agenda da barbearia (criar, listar e deletar cortes).
+
 const express = require('express');
 const router = express.Router();
 const {
